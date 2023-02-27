@@ -1,7 +1,7 @@
 name: GitLab-to-GitHub-Pipeline
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
 jobs:
   clone-gitlab-project:
