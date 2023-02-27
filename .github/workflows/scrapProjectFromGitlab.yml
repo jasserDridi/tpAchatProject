@@ -1,1 +1,20 @@
-
+name: GitLab-to-GitHub-Pipeline
+on:
+  pull_request:
+jobs:
+  clone-gitlab-project:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == 'https://gitlab.com/saiflaabidi1/tpachatproject'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Clone GitLab project
+        run: |
+          git clone https://gitlab.com/saiflaabidi1/tpachatproject
+          cd tpachatproject
+          git checkout ${{ github.event.pull_request.head.ref }}
+          git remote add github https://github.com/jasserDridi/tpAchatProject.git
+          git push -f github ${GITHUB_HEAD_REF}:${GITHUB_HEAD_REF}:refs/pull/${{ github.event.pull_request.number }}/head
+        env:
+          GITHUB_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+ 
