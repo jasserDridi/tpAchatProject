@@ -1,6 +1,8 @@
 name: GitLab-to-GitHub-Pipeline
 on:
   pull_request:
+   branches:
+   - main
 jobs:
   clone-gitlab-project:
     runs-on: ubuntu-latest
